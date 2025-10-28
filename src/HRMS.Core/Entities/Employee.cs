@@ -4,39 +4,31 @@ namespace HRMS.Core.Entities;
 
 public class Employee:AuditableEntity
 {
-    
-    public string EmployeeCode { get; set; }
-    public string FullName { get; set; }
-   
-    public string Gender { get; set; }
+    public string EmployeeCode { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
+    public string Gender { get; set; } = string.Empty;
     public DateTime? DateOfBirth { get; set; }
     public DateTime? JoinDate { get; set; }
-
     // FK
-    public int? DepartmentId { get; set; }
+    public long DepartmentId { get; set; }
     public Department Department { get; set; }
-
-    public int? DesignationId { get; set; }
+    public long DesignationId { get; set; }
     public Designation Designation { get; set; }
 
     // Self reference for reporting manager
-    public int? ReportingManagerId { get; set; }
+    public long ReportingManagerId { get; set; }
     public Employee ReportingManager { get; set; }
     public ICollection<Employee> DirectReports { get; set; } = new List<Employee>();
-
-    public string NationalId { get; set; }
-    public string Email { get; set; }
-    public string Phone { get; set; }
-    public string Address { get; set; }
-    public string PermanentAddress { get; set; }
-    public string MaritalStatus { get; set; }
-    public string BloodGroup { get; set; }
-    public string EmergencyContactName { get; set; }
-    public string EmergencyContactPhone { get; set; }
-    public bool Status { get; set; } = true;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? UpdatedAt { get; set; }
-
+    public string NationalId { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string Phone { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public string PermanentAddress { get; set; } = string.Empty;
+    public string MaritalStatus { get; set; } = string.Empty;
+    public string BloodGroup { get; set; } = string.Empty;
+    public string EmergencyContactName { get; set; } = string.Empty;
+    public string EmergencyContactPhone { get; set; } = string.Empty;
+    public bool IsActive { get; set; } 
     // Navigation
     public ICollection<EmployeeFile> EmployeeFiles { get; set; } = new List<EmployeeFile>();
     public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
