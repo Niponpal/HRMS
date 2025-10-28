@@ -1,19 +1,14 @@
 ﻿using HRMS.Core.Entities.BaseEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HRMS.Core.Entities
+namespace HRMS.Core.Entities;
+
+public class HolidayAssignment:AuditableEntity
 {
-    public class HolidayAssignment:AuditableEntity
-    {
-        public int HolidayId { get; set; }
-        public Holiday Holiday { get; set; }
-        public int? DepartmentId { get; set; }
-        public Department Department { get; set; }
-        public string ShiftName { get; set; }
+    public long HolidayId { get; set; }
+    public Holiday Holiday { get; set; }
+    public long DepartmentId { get; set; }
+    public Department Department { get; set; }
+    public long ShiftId { get; set; }
+    public Shift Shift { get; set; }
 
-    }
 }

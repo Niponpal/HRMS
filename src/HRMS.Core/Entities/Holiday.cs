@@ -4,14 +4,12 @@ namespace HRMS.Core.Entities
 {
     public class Holiday: AuditableEntity
     {
-       
-        public string HolidayName { get; set; }
-        public DateTime HolidayDate { get; set; }
-        public string HolidayType { get; set; } = "General"; // Govt, Religious, Company
-        public bool IsRecurring { get; set; } = false;
-        public string Remarks { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        public string Name { get; set; } = string.Empty;
+        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
+        public string Type { get; set; } = "General"; // Govt, Religious, Company
+        public string Remarks { get; set; } = string.Empty;
         public ICollection<HolidayAssignment> HolidayAssignments { get; set; } = new List<HolidayAssignment>();
 
     }
