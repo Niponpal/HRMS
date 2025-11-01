@@ -80,16 +80,11 @@ public class EmployeeCongiguration:IEntityTypeConfiguration<Employee>
             .WithMany(des => des.Employees)
             .HasForeignKey(d => d.DesignationId);
 
-        // Self-referencing Relationship for Reporting Manager
-        builder.HasOne(d => d.ReportingManager)
-            .WithMany(mgr => mgr.DirectReports)
-            .HasForeignKey(d => d.ReportingManagerId);
-
         // Employee → EmployeeFiles (One-to-Many)
 
         builder.HasMany(e => e.EmployeeFiles)
-              .WithOne(ef => ef.Employee)
-              .HasForeignKey(ef => ef.EmployeeId);
+              .WithOne(e => e.Employee)
+              .HasForeignKey(e => e.EmployeeId);
 
         builder.HasMany(e => e.Attendances)
                .WithOne(a => a.Employee)
@@ -103,13 +98,13 @@ public class EmployeeCongiguration:IEntityTypeConfiguration<Employee>
 
         // Employee → LeaveApprovals (One-to-Many)
         builder.HasMany(e => e.LeaveApprovals)
-               .WithOne(la => la.Approver)
+               .WithOne(a => a.Approver)
                .HasForeignKey(la => la.ApproverId);
 
         // Employee → HRGroupMembers (One-to-Many)
         builder.HasMany(e => e.HRGroupMembers)
-               .WithOne(hgm => hgm.Employee)
-               .HasForeignKey(hgm => hgm.EmployeeId);
+               .WithOne(h => h.Employee)
+               .HasForeignKey(h => h.EmployeeId);
 
         // Employee → Payrolls (One-to-Many)
         builder.HasMany(e => e.Payrolls)
@@ -118,24 +113,23 @@ public class EmployeeCongiguration:IEntityTypeConfiguration<Employee>
 
         // Employee → ProvidentFunds (One-to-Many)
         builder.HasMany(e => e.ProvidentFunds)
-               .WithOne(pf => pf.Employee)
-               .HasForeignKey(pf => pf.EmployeeId);
+               .WithOne(p => p.Employee)
+               .HasForeignKey(p => p.EmployeeId);
 
         // Employee → SalaryStructures (One-to-Many)
         builder.HasMany(e => e.SalaryStructures)
-               .WithOne(ss => ss.Employee)
-               .HasForeignKey(ss => ss.EmployeeId);
+               .WithOne(s => s.Employee)
+               .HasForeignKey(s => s.EmployeeId);
 
         // Employee → CurrentSalaryStructure (One-to-One)
         builder.HasOne(e => e.CurrentSalaryStructure)
-               .WithOne(ss => ss.Employee)
-               .HasForeignKey<SalaryStructure>(ss => ss.EmployeeId);
+               .WithOne(s => s.Employee)
+               .HasForeignKey<SalaryStructure>(s => s.EmployeeId);
            
 
         // Employee → ProvidentFund (One-to-One)
         builder.HasOne(e => e.ProvidentFund)
-               .WithOne(pf => pf.Employee)
-               .HasForeignKey<ProvidentFund>(pf => pf.EmployeeId);
-
+               .WithOne(p => p.Employee)
+               .HasForeignKey<ProvidentFund>(p => p.EmployeeId);
     }
 }

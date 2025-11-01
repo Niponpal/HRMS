@@ -9,7 +9,7 @@ public class LeaveTypeConfiguration:IEntityTypeConfiguration<LeaveType>
     public void Configure(EntityTypeBuilder<LeaveType> builder)
     {
         builder.HasKey(lt => lt.Id);
-        builder.ToTable("LeaveTypes");
+        builder.ToTable(nameof(LeaveType));
 
         // Configure properties
         builder.Property(d=>d.Name)
