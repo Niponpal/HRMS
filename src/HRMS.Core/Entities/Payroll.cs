@@ -8,7 +8,7 @@ public class Payroll:AuditableEntity
     public long EmployeeId { get; set; }
     public Employee Employee { get; set; }
 
-    public long StructureId { get; set; }
+    public long SalaryStructureId { get; set; }
     public SalaryStructure SalaryStructure { get; set; }
 
     public int PayrollMonth { get; set; }

@@ -34,7 +34,10 @@ public class Employee:AuditableEntity
     public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
     public ICollection<LeaveApplication> LeaveApplications { get; set; } = new List<LeaveApplication>();
     public ICollection<LeaveApproval> LeaveApprovals { get; set; } = new List<LeaveApproval>();
+    public ICollection<HRGroupMember> HRGroupMembers { get; set; } = new List<HRGroupMember>();
     public ICollection<Payroll> Payrolls { get; set; } = new List<Payroll>();
+    public ICollection<ProvidentFund> ProvidentFunds { get; set; } = new List<ProvidentFund>();
+    public ICollection<SalaryStructure> SalaryStructures { get; set; } = new List<SalaryStructure>();
     public SalaryStructure CurrentSalaryStructure { get; set; }
     public ProvidentFund ProvidentFund { get; set; }
 
