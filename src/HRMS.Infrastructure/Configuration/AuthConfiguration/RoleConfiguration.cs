@@ -13,12 +13,14 @@ public class RoleConfiguration: IEntityTypeConfiguration<Role>
             Id = 1,
             Name = "Administrator",
             NormalizedName = "ADMINISTRATOR",
+            Description = "Default role assigned to all employees."
 
         }, new Role
         {
             Id = 2,
             Name = "Employee",
             NormalizedName = "EMPLOYEE",
+            Description= "Default role assigned to all employees."
         });
     }
 }
