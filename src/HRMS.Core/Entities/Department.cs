@@ -4,8 +4,9 @@ namespace HRMS.Core.Entities;
 
 public class Department:AuditableEntity
 {
-
     public string Name { get; set; } = string.Empty;
     public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+
+    public ICollection<HolidayAssignment> HolidayAssigment { get; set; } = new List<HolidayAssignment>();
 
 }

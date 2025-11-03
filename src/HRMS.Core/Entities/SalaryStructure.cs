@@ -17,4 +17,6 @@ public class SalaryStructure:AuditableEntity
     public decimal GrossSalary { get; private set; }
     public bool IsActive { get; set; } = true;
 
+    public ICollection<Payroll> Payrolls { get; set; } = new List<Payroll>();
+
 }

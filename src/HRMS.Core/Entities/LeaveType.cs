@@ -8,4 +8,6 @@ public class LeaveType:AuditableEntity
     public int MaxDaysPerYear { get; set; }
     public bool IsPaid { get; set; } 
 
+   public ICollection<LeaveApplication> LeaveAllocations { get; set; } = new List<LeaveApplication>();
+
 }
