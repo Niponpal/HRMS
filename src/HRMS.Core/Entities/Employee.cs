@@ -14,11 +14,13 @@ public class Employee:AuditableEntity
     public Department Department { get; set; }
     public long DesignationId { get; set; }
     public Designation Designation { get; set; }
+    //
+    public long SalaryStructureId { get; set; }
+    public SalaryStructure SalaryStructure { get; set; }
 
     // Self reference for reporting manager
     public long ReportingManagerId { get; set; }
     public Employee ReportingManager { get; set; }
-    public ICollection<Employee> DirectReports { get; set; } = new List<Employee>();
     public string NationalId { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
@@ -36,9 +38,5 @@ public class Employee:AuditableEntity
     public ICollection<LeaveApproval> LeaveApprovals { get; set; } = new List<LeaveApproval>();
     public ICollection<HRGroupMember> HRGroupMembers { get; set; } = new List<HRGroupMember>();
     public ICollection<Payroll> Payrolls { get; set; } = new List<Payroll>();
-    public ICollection<ProvidentFund> ProvidentFunds { get; set; } = new List<ProvidentFund>();
-    public ICollection<SalaryStructure> SalaryStructures { get; set; } = new List<SalaryStructure>();
-    public SalaryStructure CurrentSalaryStructure { get; set; }
-    public ProvidentFund ProvidentFund { get; set; }
-
+    public ICollection<ProvidentFund> ProvidentFund { get; set; } = new List<ProvidentFund>();
 }

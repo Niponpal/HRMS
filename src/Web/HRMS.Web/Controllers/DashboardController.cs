@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace HRMS.Web.Controllers
+namespace HRMS.Web.Controllers;
+
+[Authorize]
+public class DashboardController : Controller
 {
-    public class DashboardController : Controller
+    [Route("/Dashboard")]
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

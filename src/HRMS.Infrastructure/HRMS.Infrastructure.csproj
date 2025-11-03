@@ -26,4 +26,8 @@
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
