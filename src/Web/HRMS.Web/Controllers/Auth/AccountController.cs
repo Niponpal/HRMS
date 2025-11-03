@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace HRMS.Web.Controllers;
+namespace HRMS.Web.Controllers.Auth;
 
-public class DashboardController : Controller
+public class AccountController : Controller
 {
     public IActionResult Index()
     {
