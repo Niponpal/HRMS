@@ -10,12 +10,6 @@ public class ProvidentFundConfiguration:IEntityTypeConfiguration<ProvidentFund>
     {
         builder.HasKey(pf => pf.Id);
         builder.ToTable(nameof(ProvidentFund));
-
-        // Configure properties
-        builder.Property(d => d.PFEmployeePercentage)
-            .IsRequired(false);
-        builder.Property(d => d.PFEmployerPercentage)
-            .IsRequired(false);
         builder.Property(d => d.EffectiveFrom)
             .IsRequired();
         builder.Property(d => d.Remarks)
@@ -24,11 +18,8 @@ public class ProvidentFundConfiguration:IEntityTypeConfiguration<ProvidentFund>
 
         // Configure relationships
 
-        builder.HasOne(d=>d.Employee)
-            .WithMany(e=>e.ProvidentFunds)
-            .HasForeignKey(d=>d.EmployeeId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-
+        builder.HasOne(d => d.Employee)
+            .WithMany(e => e.ProvidentFund)
+            .HasForeignKey(d => d.EmployeeId);
     }
 }

@@ -111,25 +111,8 @@ public class EmployeeCongiguration:IEntityTypeConfiguration<Employee>
                .WithOne(p => p.Employee)
                .HasForeignKey(p => p.EmployeeId);
 
-        // Employee → ProvidentFunds (One-to-Many)
-        builder.HasMany(e => e.ProvidentFunds)
-               .WithOne(p => p.Employee)
-               .HasForeignKey(p => p.EmployeeId);
-
-        // Employee → SalaryStructures (One-to-Many)
-        builder.HasMany(e => e.SalaryStructures)
-               .WithOne(s => s.Employee)
-               .HasForeignKey(s => s.EmployeeId);
-
-        // Employee → CurrentSalaryStructure (One-to-One)
-        builder.HasOne(e => e.CurrentSalaryStructure)
-               .WithOne(s => s.Employee)
-               .HasForeignKey<SalaryStructure>(s => s.EmployeeId);
-           
-
-        // Employee → ProvidentFund (One-to-One)
-        builder.HasOne(e => e.ProvidentFund)
-               .WithOne(p => p.Employee)
-               .HasForeignKey<ProvidentFund>(p => p.EmployeeId);
+        builder.HasOne(d => d.SalaryStructure)
+            .WithMany(des => des.Employees)
+            .HasForeignKey(d => d.SalaryStructureId);
     }
 }

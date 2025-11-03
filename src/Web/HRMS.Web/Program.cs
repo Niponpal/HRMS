@@ -1,6 +1,8 @@
 using HRMS.Infrastructure;
+using HRMS.Application;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var app = builder.Build();
@@ -21,7 +23,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Account}/{action=Login}/{id?}")
     .WithStaticAssets();
 
 

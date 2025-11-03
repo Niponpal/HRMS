@@ -4,8 +4,6 @@ namespace HRMS.Core.Entities;
 
 public class SalaryStructure:AuditableEntity
 {
-    public long EmployeeId { get; set; }
-    public Employee Employee { get; set; }
     public DateTime EffectiveFrom { get; set; }
     public decimal BasicSalary { get; set; }
     public decimal HouseRent { get; set; }
@@ -18,5 +16,6 @@ public class SalaryStructure:AuditableEntity
     public bool IsActive { get; set; } = true;
 
     public ICollection<Payroll> Payrolls { get; set; } = new List<Payroll>();
+    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
 }

@@ -23,11 +23,6 @@ public class SalaryStructureConfiguration:IEntityTypeConfiguration<SalaryStructu
             .IsRequired();
         builder.Property(builder => builder.OtherAllowance)
             .IsRequired();
-        // Configure computed column for GrossSalary
-
-        builder.HasOne(builder => builder.Employee)
-            .WithMany(d => d.SalaryStructures)
-            .HasForeignKey(builder => builder.EmployeeId);
     }
 
 }
