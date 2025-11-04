@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRMS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Createdatabase : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -737,8 +737,8 @@ namespace HRMS.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedBy", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { 1L, 0, "8116a13f-0d4a-4ef7-a432-4fc88a04863a", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEOXuaBeoKbfjTnwu45SNqIMu6GR8SI121uTCLBVqT5PeoT8VIen4fylYOx7o62dI9g==", null, false, "ab2cdc08-405d-4d66-b908-7f9c21550b43", false, null, null, "admin@localhost.com" },
-                    { 2L, 0, "c3aa0940-2e40-44ea-819d-27076736a803", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "employee@localhost.com", true, false, null, "", "EMPLOYEE@LOCALHOST.COM", "EMPLOYEE@LOCALHOST.COM", "AQAAAAIAAYagAAAAELbCujmzOrZ5tBI70bJ9HidW/jcS3BHwT7wjav1JbzNzxiWbht1YRA3mTvBi+4T9Iw==", null, false, "755df02d-f270-470a-b0a6-d5319e3ba18d", false, null, null, "employee@localhost.com" }
+                    { 1L, 0, "645b8469-6547-40cc-aca7-73a9caf2b14c", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEAxgn6lHBmVd8GDHpJ/dYlzM8/848UhyU92ZDGF/YdomKbkLOxENxKgcDiTcPv4e6g==", null, false, "190dea53-4bc2-442a-95bc-9e069d77eaf8", false, null, null, "admin@localhost.com" },
+                    { 2L, 0, "2121e2b8-5d9d-4c27-a1b3-6f1ba07379f4", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "employee@localhost.com", true, false, null, "", "EMPLOYEE@LOCALHOST.COM", "EMPLOYEE@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGwjtwBxFSzRZoFCOeIz9+GNcnyw3rtQVVErQIeve5S4QXF59zbdOSd99ogDNr2hjw==", null, false, "65fb9714-3848-4798-9cdc-3cb94570f7b0", false, null, null, "employee@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
