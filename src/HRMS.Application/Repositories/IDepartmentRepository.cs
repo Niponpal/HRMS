@@ -12,15 +12,44 @@ public interface IDepartmentRepository
 {
     Task<PaginationModel<DepartmentVm>> GetDepartmentAsync(Filter filter, CancellationToken ct);
     Task<DepartmentVm> GetDepartmentByIdAsync(long id, CancellationToken ct);
-    Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm categoryVm, CancellationToken ct);
+    Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm departmentVm, CancellationToken ct);
     Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct);
 }
 
 public class DepartmentRepository(ApplicationDbContext context, IMapper mapper) : IDepartmentRepository
 {
-    public Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm categoryVm, CancellationToken ct)
+    public async Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm departmentVm, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        try
+        {
+            // Check if updating or creating
+            var department = departmentVm.Id > 0
+                ? await context.Set<Department>().FirstOrDefaultAsync(d => d.Id == departmentVm.Id, ct)
+                : new Department();
+
+            // If updating but not found, return null
+            if (departmentVm.Id > 0 && department == null) return null;
+
+            // Map ViewModel to Entity
+            mapper.Map(departmentVm, department); // AutoMapper updates existing entity if provided
+
+            // Add or Update
+            if (departmentVm.Id > 0)
+                context.Set<Department>().Update(department);
+            else
+                await context.Set<Department>().AddAsync(department, ct);
+
+            await context.SaveChangesAsync(ct);
+
+            // Map back to ViewModel
+            return mapper.Map<DepartmentVm>(department);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+        
     }
 
     public async Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct)
