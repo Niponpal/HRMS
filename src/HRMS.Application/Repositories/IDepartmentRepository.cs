@@ -49,7 +49,6 @@ public class DepartmentRepository(ApplicationDbContext context, IMapper mapper) 
             Console.WriteLine(ex.Message);
             throw;
         }
-        
     }
 
     public async Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct)
