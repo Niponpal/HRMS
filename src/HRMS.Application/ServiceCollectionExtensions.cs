@@ -1,4 +1,5 @@
-﻿using HRMS.Application.Mapping;
+﻿using HRMS.Application.Logging;
+using HRMS.Application.Mapping;
 using HRMS.Application.Repositories;
 using HRMS.Application.Repositories.Auth;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,10 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-        services.AddAutoMapper(typeof(MappingProfile));
+        services.AddScoped(typeof(IAppLogger<>), typeof(AppLogger<>));
+        services.AddAutoMapper(x => {
+            x.AddMaps(typeof(IApplication).Assembly);
+
+        });
     }
 }

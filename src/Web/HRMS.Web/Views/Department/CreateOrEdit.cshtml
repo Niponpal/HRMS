@@ -1,0 +1,29 @@
+﻿@model HRMS.Application.ViewModel.DepartmentVm
+@{
+   
+}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">
+                @(Model.Id > 0 ? "Edit Department" : "Create Department")
+            </h2>
+            <form asp-action="create-or-edit" method="post" asp-controller="department">
+                @* Hidden Id field for edit *@
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter category name" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    @(Model.Id > 0 ? "Update" : "Create")
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

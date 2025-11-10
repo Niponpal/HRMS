@@ -8,7 +8,7 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Department, DepartmentVm>();
+        CreateMap<Department, DepartmentVm>().ReverseMap();
     }
 }
 

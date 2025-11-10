@@ -20,101 +20,67 @@ public interface IDepartmentRepository
     Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct);
 }
 
-public class DepartmentRepository(ApplicationDbContext context, IMapper mapper) : IDepartmentRepository
+public class DepartmentRepository : IDepartmentRepository
 {
-    public async Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm departmentVm, CancellationToken ct)
+    private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
+
+    public DepartmentRepository(ApplicationDbContext context, IMapper mapper)
     {
-        try
-        {
-            // Check if updating or creating
-            var department = departmentVm.Id > 0
-                ? await context.Set<Department>().FirstOrDefaultAsync(d => d.Id == departmentVm.Id, ct)
-                : new Department();
-
-            // If updating but not found, return null
-            if (departmentVm.Id > 0 && department == null) return null;
-
-            // Map ViewModel to Entity
-            mapper.Map(departmentVm, department); // AutoMapper updates existing entity if provided
-
-            // Add or Update
-            if (departmentVm.Id > 0)
-                context.Set<Department>().Update(department);
-            else
-                await context.Set<Department>().AddAsync(department, ct);
-
-            await context.SaveChangesAsync(ct);
-
-            // Map back to ViewModel
-            return mapper.Map<DepartmentVm>(department);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
-    }
-
-    public async Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct)
-    {
-        try
-        {
-            var category = await context.Set<Department>()
-                          .AsNoTracking()
-                          .FirstOrDefaultAsync(c => c.Id == id, ct);
-            if (category == null) return false;
-            category.IsDelete = true;
-            await context.SaveChangesAsync(ct);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
-       
+        _context = context;
+        _mapper = mapper;
     }
 
     public async Task<PaginationModel<DepartmentVm>> GetDepartmentAsync(Filter filter, CancellationToken ct)
     {
-        try
-        {
-            var query = context.Set<Department>()
-                   .AsNoTracking()
-                   .Where(c => !c.IsDelete);
+        var query = _context.Set<Department>()
+            .AsNoTracking()
+            .Where(d => !d.IsDelete);
 
-            // Specification pattern apply
-            query = SpecificationEvaluator<Department>.GetQuery(query, new DepartmentSpecification(filter));
+        query = SpecificationEvaluator<Department>.GetQuery(query, new DepartmentSpecification(filter));
 
-            // Pagination and mapping
-            var result = await query
-                        .ProjectTo<DepartmentVm>(mapper.ConfigurationProvider)
-                        .ToPagedListAsync(filter.Page, filter.PageSize, x => x.Id, true);
-
-            return result;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
-       
+        return await query
+            .ProjectTo<DepartmentVm>(_mapper.ConfigurationProvider)
+            .ToPagedListAsync(filter.Page, filter.PageSize, x => x.Id, true);
     }
 
     public async Task<DepartmentVm> GetDepartmentByIdAsync(long id, CancellationToken ct)
     {
-        try
-        {
-            var category = await context.Set<Department>()
-                           .AsNoTracking()
-                           .FirstOrDefaultAsync(c => c.Id == id && !c.IsDelete, ct);
-            return mapper.Map<DepartmentVm>(category);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            throw;
-        }
-       
+        var department = await _context.Set<Department>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(d => d.Id == id && !d.IsDelete, ct);
+
+        return _mapper.Map<DepartmentVm>(department);
+    }
+
+    public async Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm departmentVm, CancellationToken ct)
+    {
+        var department = departmentVm.Id > 0
+            ? await _context.Set<Department>().FirstOrDefaultAsync(d => d.Id == departmentVm.Id, ct)
+            : new Department();
+
+        if (departmentVm.Id > 0 && department == null) return null;
+
+        _mapper.Map(departmentVm, department);
+
+        if (departmentVm.Id > 0)
+            _context.Set<Department>().Update(department);
+        else
+            await _context.Set<Department>().AddAsync(department, ct);
+
+        await _context.SaveChangesAsync(ct);
+
+        return _mapper.Map<DepartmentVm>(department);
+    }
+
+    public async Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct)
+    {
+        var department = await _context.Set<Department>().FirstOrDefaultAsync(d => d.Id == id, ct);
+        if (department == null) return false;
+
+        department.IsDelete = true;
+        await _context.SaveChangesAsync(ct);
+
+        return true;
     }
 }
