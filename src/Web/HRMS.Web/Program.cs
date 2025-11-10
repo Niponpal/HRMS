@@ -1,6 +1,18 @@
 using HRMS.Infrastructure;
 using HRMS.Application;
+using Serilog;
+using HRMS.Web.Logging;
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .Enrich.With<TraceIdEnricher>()   // Custom enricher adds TraceId
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.Seq("http://localhost:5341")
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplicationServices(builder.Configuration);
 // Add services to the container.
