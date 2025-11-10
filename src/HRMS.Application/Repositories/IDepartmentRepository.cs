@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using HRMS.Application.CommonModel;
+using HRMS.Application.Expressions;
+using HRMS.Application.Extensions;
 using HRMS.Application.Filterl;
+using HRMS.Application.ModelSpecification;
 using HRMS.Application.ViewModel;
 using HRMS.Core.Entities;
 using HRMS.Infrastructure.DatabaseContext;
@@ -71,9 +75,30 @@ public class DepartmentRepository(ApplicationDbContext context, IMapper mapper) 
        
     }
 
-    public Task<PaginationModel<DepartmentVm>> GetDepartmentAsync(Filter filter, CancellationToken ct)
+    public async Task<PaginationModel<DepartmentVm>> GetDepartmentAsync(Filter filter, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var query = context.Set<Department>()
+                   .AsNoTracking()
+                   .Where(c => !c.IsDelete);
+
+            // Specification pattern apply
+            query = SpecificationEvaluator<Department>.GetQuery(query, new DepartmentSpecification(filter));
+
+            // Pagination and mapping
+            var result = await query
+                        .ProjectTo<DepartmentVm>(mapper.ConfigurationProvider)
+                        .ToPagedListAsync(filter.Page, filter.PageSize, x => x.Id, true);
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+       
     }
 
     public async Task<DepartmentVm> GetDepartmentByIdAsync(long id, CancellationToken ct)
