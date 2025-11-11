@@ -56,7 +56,7 @@ public class DepartmentRepository : IDepartmentRepository
     public async Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm departmentVm, CancellationToken ct)
     {
         var department = departmentVm.Id > 0
-            ? await _context.Set<Department>().FirstOrDefaultAsync(d => d.Id == departmentVm.Id, ct)
+            ? await _context.Set<Department>().FirstOrDefaultAsync(d => d.Id == departmentVm.Id && !d.IsDelete, ct)
             : new Department();
 
         if (departmentVm.Id > 0 && department == null) return null;
