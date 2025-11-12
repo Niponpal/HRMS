@@ -39,6 +39,8 @@ public class DepartmentController : Controller
 
             _logger.LogInfo($"Fetching departments. Search={search}, Page={page}, PageSize={pageSize}");
 
+            //  Cantionaltokan  HttpContext.RequestAborted
+
             var pagination = await _departmentRepository.GetDepartmentAsync(filter, HttpContext.RequestAborted);
 
 #if DEBUG
