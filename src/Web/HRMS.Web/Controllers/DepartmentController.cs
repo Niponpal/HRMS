@@ -154,4 +154,13 @@ public class DepartmentController : Controller
             return StatusCode(500);
         }
     }
+
+    [HttpGet]
+    [Route("department/download-demo-excel")]
+    public IActionResult DownloadDemoExcel()
+    {
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "demo", "DepartmentDemo.xlsx");
+        var fileBytes = System.IO.File.ReadAllBytes(filePath);
+        return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DepartmentDemo.xlsx");
+    }
 }
