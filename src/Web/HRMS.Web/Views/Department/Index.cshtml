@@ -21,11 +21,12 @@
             </a>
 
             <form asp-action="UploadExcel" asp-controller="Department" method="post" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
-                <input type="file" name="excelFile" accept=".xlsx,.xls" class="form-control form-control-sm" style="width: 200px;" required />
+                <input type="file" name="file" accept=".xlsx,.xls" class="form-control form-control-sm" style="width: 200px;" required />
                 <button type="submit" class="btn btn-success d-flex align-items-center gap-2">
                     <i class="bi bi-file-earmark-arrow-up"></i> Upload Excel
                 </button>
             </form>
+
         </div>
 
         <!-- Create -->

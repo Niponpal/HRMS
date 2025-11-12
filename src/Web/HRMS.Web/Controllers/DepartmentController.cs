@@ -2,6 +2,7 @@
 using HRMS.Application.Logging;
 using HRMS.Application.Repositories;
 using HRMS.Application.ViewModel;
+using HRMS.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -162,5 +163,31 @@ public class DepartmentController : Controller
         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "demo", "DepartmentDemo.xlsx");
         var fileBytes = System.IO.File.ReadAllBytes(filePath);
         return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DepartmentDemo.xlsx");
+    }
+    [HttpPost]
+    [Route("department/upload-excel")]
+    public async Task<IActionResult> UploadExcel(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest("Please upload a valid Excel file.");
+
+        try
+        {
+            // Await async repository method
+            var insertedCount = await _departmentRepository.DepartmentUploadExcelAsync(file, HttpContext.RequestAborted);
+
+            TempData["AlertMessage"] = insertedCount; // This will contain your success message
+            TempData["AlertType"] = "Success";
+
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("Error while uploading Excel", ex);
+            TempData["AlertMessage"] = "An error occurred while uploading the Excel file.";
+            TempData["AlertType"] = "Error";
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
