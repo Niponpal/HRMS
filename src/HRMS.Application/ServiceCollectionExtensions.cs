@@ -2,6 +2,7 @@
 using HRMS.Application.Mapping;
 using HRMS.Application.Repositories;
 using HRMS.Application.Repositories.Auth;
+using HRMS.Application.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services. AddScoped<IExcelUploadService, ExcelUploadService>();
         services.AddScoped(typeof(IAppLogger<>), typeof(AppLogger<>));
         services.AddAutoMapper(x => {
             x.AddMaps(typeof(IApplication).Assembly);

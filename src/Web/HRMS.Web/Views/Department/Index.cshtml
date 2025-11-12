@@ -13,6 +13,22 @@
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
 
+
+        <!-- Excel Controls (centered on large screens) -->
+        <div class="d-flex justify-content-center gap-2 mt-2 mt-md-0">
+            <a href="@Url.Action("download-demo-excel", "department")" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                <i class="bi bi-file-earmark-arrow-down"></i> Download Demo
+            </a>
+
+            <form asp-action="UploadExcel" asp-controller="Department" method="post" enctype="multipart/form-data" class="d-flex align-items-center gap-2">
+                <input type="file" name="file" accept=".xlsx,.xls" class="form-control form-control-sm" style="width: 200px;" required />
+                <button type="submit" class="btn btn-success d-flex align-items-center gap-2">
+                    <i class="bi bi-file-earmark-arrow-up"></i> Upload Excel
+                </button>
+            </form>
+
+        </div>
+
         <!-- Create -->
         <a href="@Url.Action("create-or-edit", "department")" class="btn btn-success d-flex align-items-center gap-2 mr-2" title="Create New Category">
             <svg class="d-block d-sm-none" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
