@@ -81,7 +81,7 @@ namespace HRMS.Application.Repositories
 
         public async Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct)
         {
-            var department = await _context.Set<Department>().FirstOrDefaultAsync(d => d.Id == id, ct);
+            var department = await _context.Set<Department>().FindAsync(id, ct);
             if (department == null) return false;
 
             department.IsDelete = true;
