@@ -1,4 +1,5 @@
-﻿using HRMS.Application.Logging;
+﻿using HRMS.Application.FileServices;
+using HRMS.Application.Logging;
 using HRMS.Application.Mapping;
 using HRMS.Application.Repositories;
 using HRMS.Application.Repositories.Auth;
@@ -16,6 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services. AddScoped<IExcelUploadService, ExcelUploadService>();
         services.AddScoped(typeof(IAppLogger<>), typeof(AppLogger<>));
+        services.AddSingleton<IFileService, FileService>();
         services.AddAutoMapper(x => {
             x.AddMaps(typeof(IApplication).Assembly);
 
