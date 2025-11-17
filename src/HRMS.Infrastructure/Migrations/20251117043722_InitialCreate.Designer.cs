@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251103065641_Createdatabase")]
-    partial class Createdatabase
+    [Migration("20251117043722_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,7 +101,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -214,7 +213,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -267,7 +265,7 @@ namespace HRMS.Infrastructure.Migrations
                         {
                             Id = 1L,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8116a13f-0d4a-4ef7-a432-4fc88a04863a",
+                            ConcurrencyStamp = "0a7338b7-43f7-4d51-b08f-49a0d6bde0fd",
                             CreatedBy = 0L,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@localhost.com",
@@ -276,9 +274,9 @@ namespace HRMS.Infrastructure.Migrations
                             Name = "",
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOXuaBeoKbfjTnwu45SNqIMu6GR8SI121uTCLBVqT5PeoT8VIen4fylYOx7o62dI9g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPqZ+XBDHyBdQK5sMBwNQKzKZOaDu5+bALUwynCuYiw2x39ATy/zGlpb33Zk/ElLuw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ab2cdc08-405d-4d66-b908-7f9c21550b43",
+                            SecurityStamp = "24f40946-6eed-47ef-8123-cf1f11c832ae",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -286,7 +284,7 @@ namespace HRMS.Infrastructure.Migrations
                         {
                             Id = 2L,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3aa0940-2e40-44ea-819d-27076736a803",
+                            ConcurrencyStamp = "53f3bb72-5116-4ae4-9fba-3bf951e63187",
                             CreatedBy = 0L,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "employee@localhost.com",
@@ -295,9 +293,9 @@ namespace HRMS.Infrastructure.Migrations
                             Name = "",
                             NormalizedEmail = "EMPLOYEE@LOCALHOST.COM",
                             NormalizedUserName = "EMPLOYEE@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELbCujmzOrZ5tBI70bJ9HidW/jcS3BHwT7wjav1JbzNzxiWbht1YRA3mTvBi+4T9Iw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP2g7xL+3ipERzpaq1LUsfm64pm+DqNXGYzhVe54kz4hT9VyBQ+vtmsvA7iC76UqXg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "755df02d-f270-470a-b0a6-d5319e3ba18d",
+                            SecurityStamp = "d5cffac2-b3de-4613-a43d-e4e732657851",
                             TwoFactorEnabled = false,
                             UserName = "employee@localhost.com"
                         });
@@ -669,7 +667,6 @@ namespace HRMS.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("AffectedColumns")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("CreatedBy")
@@ -691,23 +688,18 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NewValues")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OldValues")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrimaryKey")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TableName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("UserId")
@@ -827,7 +819,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Remarks")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("ShiftId")
@@ -839,7 +830,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -919,7 +909,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CurrentStage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("EmployeeId")
@@ -931,7 +920,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("FinalStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
@@ -1350,7 +1338,6 @@ namespace HRMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Remarks")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 

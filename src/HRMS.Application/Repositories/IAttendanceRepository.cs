@@ -8,12 +8,8 @@ using HRMS.Application.ModelSpecification;
 using HRMS.Application.ViewModel;
 using HRMS.Core.Entities;
 using HRMS.Infrastructure.DatabaseContext;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRMS.Application.Repositories;
 
@@ -23,6 +19,7 @@ public interface IAttendanceRepository
     Task<AttendanceVm> GetAttendanceVmByIdAsync(long id, CancellationToken ct);
     Task<AttendanceVm> CreateOrUpdateAttendanceVmAsync(AttendanceVm  attendanceVm, CancellationToken ct);
     Task<bool> DeleteAttendanceVmAsync(long id, CancellationToken ct);
+    Task<string> AttendanceUploadExcelAsync(IFormFile file, CancellationToken ct);
 }
 
 
@@ -37,14 +34,35 @@ public class AttendanceRepository : IAttendanceRepository
         _mapper = mapper;
     }
 
-    public Task<AttendanceVm> CreateOrUpdateAttendanceVmAsync(AttendanceVm attendanceVm, CancellationToken ct)
+    public Task<string> AttendanceUploadExcelAsync(IFormFile file, CancellationToken ct)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAttendanceVmAsync(long id, CancellationToken ct)
+    public async Task<AttendanceVm> CreateOrUpdateAttendanceVmAsync(AttendanceVm attendanceVm, CancellationToken ct)
     {
-        throw new NotImplementedException();
+       var attendance = attendanceVm.Id>0
+            ? await  _context.Set<Attendance>().FirstOrDefaultAsync(d => d.Id == attendanceVm.Id && !d.IsDelete,ct)
+            : new Attendance(); 
+        if(attendanceVm.Id>0 && attendance == null)
+            return null;
+        _mapper.Map(attendanceVm, attendance);
+        if(attendanceVm.Id>0)
+            _context.Update(attendance);
+        else 
+            await _context.AddAsync(attendance, ct);
+        await _context.SaveChangesAsync(ct);
+        return _mapper.Map<AttendanceVm>(attendance);
+    }
+
+    public async Task<bool> DeleteAttendanceVmAsync(long id, CancellationToken ct)
+    {
+       var attendance =  await _context.Set<Attendance>().FirstOrDefaultAsync(d=>d.Id==id, ct);
+        if (attendance == null) return false;
+       
+        attendance.IsDelete = true;
+        await _context.SaveChangesAsync(ct);
+        return true;
     }
 
     public async Task<PaginationModel<AttendanceVm>> GetAttendanceVmAsync(Filter filter, CancellationToken ct)
@@ -59,8 +77,12 @@ public class AttendanceRepository : IAttendanceRepository
             .ToPagedListAsync(filter.Page, filter.PageSize, x => x.Id, true);
     }
 
-    public Task<AttendanceVm> GetAttendanceVmByIdAsync(long id, CancellationToken ct)
+    public async Task<AttendanceVm> GetAttendanceVmByIdAsync(long id, CancellationToken ct)
     {
-        throw new NotImplementedException();
+        var attendance = await  _context.Set<Attendance>()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(d=>d.Id == id && !d.IsDelete,ct);
+
+        return _mapper.Map<AttendanceVm>(attendance);
     }
 }
