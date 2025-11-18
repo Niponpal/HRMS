@@ -14,7 +14,7 @@ public class Employee:AuditableEntity
     public Department Department { get; set; }
     public long DesignationId { get; set; }
     public Designation Designation { get; set; }
-    //
+    //Fk
     public long SalaryStructureId { get; set; }
     public SalaryStructure SalaryStructure { get; set; }
 
