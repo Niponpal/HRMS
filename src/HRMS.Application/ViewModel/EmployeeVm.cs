@@ -3,7 +3,7 @@ using HRMS.Core.Entities.BaseEntities;
 
 namespace HRMS.Application.ViewModel;
 
-public class EmployeeVm:BaseEntity
+public class EmployeeVm: BaseEntity
 {
     [ExcelColumn("Employee Name")]
     public string FullName { get; set; } = string.Empty;
