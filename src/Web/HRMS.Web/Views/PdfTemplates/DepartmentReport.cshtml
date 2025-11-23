@@ -1,0 +1,18 @@
+﻿@model List<HRMS.Application.ViewModel.DepartmentVm>
+
+<h1 style="text-align:center">Department Name Report</h1>
+<p>Date: @DateTime.Now.ToString("dd-MMM-yyyy")</p>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Name</li> 
+        }
+    </ul>
+}
+else
+{
+    <p>No departments to display.</p>
+}
