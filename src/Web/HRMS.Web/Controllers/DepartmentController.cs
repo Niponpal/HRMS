@@ -225,7 +225,9 @@ public class DepartmentController : Controller
             };
 
             var pdfBytes = _pdfService.GeneratePdf(htmlContent, pdfOptions);
-            return File(pdfBytes, "application/pdf", "DepartmentReport.pdf");
+            // Return PDF inline (open in browser)
+            Response.Headers.Add("Content-Disposition", "inline; filename=DepartmentReport.pdf");
+            return File(pdfBytes, "application/pdf");
         }
         catch (Exception ex)
         {
