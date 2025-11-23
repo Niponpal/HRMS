@@ -1,8 +1,10 @@
-﻿using HRMS.Application.Filterl;
+﻿using HRMS.Application.CommonModel;
+using HRMS.Application.Filterl;
 using HRMS.Application.Logging;
 using HRMS.Application.Repositories;
+using HRMS.Application.Services;
+using HRMS.Application.Services.Pdf;
 using HRMS.Application.ViewModel;
-using HRMS.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -14,11 +16,19 @@ public class DepartmentController : Controller
 {
     private readonly IDepartmentRepository _departmentRepository;
     private readonly IAppLogger<DepartmentController> _logger;
+    private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
+    private readonly IPdfService _pdfService;
 
-    public DepartmentController(IDepartmentRepository departmentRepository, IAppLogger<DepartmentController> logger)
+    public DepartmentController(
+        IDepartmentRepository departmentRepository,
+        IAppLogger<DepartmentController> logger,
+        IRazorViewToStringRenderer razorViewToStringRenderer,
+        IPdfService pdfService)
     {
         _departmentRepository = departmentRepository;
         _logger = logger;
+        _razorViewToStringRenderer = razorViewToStringRenderer;
+        _pdfService = pdfService;
     }
 
     public async Task<IActionResult> Index(string? search, int page = 1, int pageSize = 10)
@@ -190,4 +200,41 @@ public class DepartmentController : Controller
             return RedirectToAction(nameof(Index));
         }
     }
+
+    [HttpGet("/generate-department-pdf")]
+    public async Task<IActionResult> GenerateDepartmentPdf()
+    {
+        try
+        {
+            // Example data
+            var model = await _departmentRepository.GetAllDepartmentsAsync(CancellationToken.None);
+
+            // Render Razor view to string
+            var htmlContent = await _razorViewToStringRenderer.RenderViewToStringAsync(
+    "PdfTemplates/DepartmentReport", model);
+
+
+            var pdfOptions = new PdfOptions
+            {
+                HeaderCenter = null,
+                ShowPageNumbers = true,
+                CustomWidthMm = 210,
+                CustomHeightMm = 297,
+                HeaderFontSize = 12,
+                FooterFontSize = 10
+            };
+
+            var pdfBytes = _pdfService.GeneratePdf(htmlContent, pdfOptions);
+            // Return PDF inline (open in browser)
+            Response.Headers.Add("Content-Disposition", "inline; filename=DepartmentReport.pdf");
+            return File(pdfBytes, "application/pdf");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+        
+    }
+
 }

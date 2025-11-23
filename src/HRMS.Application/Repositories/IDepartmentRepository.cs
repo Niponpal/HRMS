@@ -16,6 +16,7 @@ namespace HRMS.Application.Repositories
 {
     public interface IDepartmentRepository
     {
+        Task<List<DepartmentVm>> GetAllDepartmentsAsync(CancellationToken ct);
         Task<PaginationModel<DepartmentVm>> GetDepartmentAsync(Filter filter, CancellationToken ct);
         Task<DepartmentVm> GetDepartmentByIdAsync(long id, CancellationToken ct);
         Task<DepartmentVm> CreateOrUpdateDepartmentAsync(DepartmentVm departmentVm, CancellationToken ct);
@@ -81,7 +82,7 @@ namespace HRMS.Application.Repositories
 
         public async Task<bool> DeleteDepartmentAsync(long id, CancellationToken ct)
         {
-            var department = await _context.Set<Department>().FirstOrDefaultAsync(d => d.Id == id, ct);
+            var department = await _context.Set<Department>().FindAsync(id, ct);
             if (department == null) return false;
 
             department.IsDelete = true;
@@ -128,5 +129,16 @@ namespace HRMS.Application.Repositories
             }
         }
 
+        public async Task<List<DepartmentVm>> GetAllDepartmentsAsync(CancellationToken ct)
+        {
+            var query = _context.Set<Department>()
+                        .AsNoTracking()
+                        .Where(d => !d.IsDelete);
+
+            // Map to List<DepartmentVm> using AutoMapper
+            return await query
+                .ProjectTo<DepartmentVm>(_mapper.ConfigurationProvider) // AutoMapper projection
+                .ToListAsync(ct); // execute the query asynchronously
+        }
     }
 }
