@@ -1,18 +1,41 @@
 ﻿@model List<HRMS.Application.ViewModel.DepartmentVm>
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-<h1 style="text-align:center">Department Name Report</h1>
+
+<h1 class="text-center mb-3">Department Name Report</h1>
 <p>Date: @DateTime.Now.ToString("dd-MMM-yyyy")</p>
 
 @if (Model != null && Model.Any())
 {
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>@item.Name</li> 
-        }
-    </ul>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th style="width:60px;">SL</th>
+                <th style="width:120px;">Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int sl = 1;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@sl</td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                </tr>
+
+                sl++;
+            }
+        </tbody>
+    </table>
 }
 else
 {
-    <p>No departments to display.</p>
+    <div class="alert alert-warning">
+        No departments to display.
+    </div>
 }
