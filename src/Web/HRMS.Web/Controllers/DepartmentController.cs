@@ -164,6 +164,7 @@ public class DepartmentController : Controller
         var fileBytes = System.IO.File.ReadAllBytes(filePath);
         return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "DepartmentDemo.xlsx");
     }
+   
     [HttpPost]
     [Route("department/upload-excel")]
     public async Task<IActionResult> UploadExcel(IFormFile file)
