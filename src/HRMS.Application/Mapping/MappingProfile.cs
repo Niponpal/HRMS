@@ -9,6 +9,8 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Department, DepartmentVm>().ReverseMap();
+        CreateMap<Attendance, AttendanceVm>().ReverseMap();
+        CreateMap<Employee, EmployeeVm>().ReverseMap();
     }
 }
 

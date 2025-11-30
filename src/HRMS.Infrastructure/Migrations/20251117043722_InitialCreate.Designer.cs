@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRMS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251110084143_int")]
-    partial class @int
+    [Migration("20251117043722_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,7 +265,7 @@ namespace HRMS.Infrastructure.Migrations
                         {
                             Id = 1L,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "397f898f-3da2-41d6-983c-78b261010af6",
+                            ConcurrencyStamp = "0a7338b7-43f7-4d51-b08f-49a0d6bde0fd",
                             CreatedBy = 0L,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@localhost.com",
@@ -274,9 +274,9 @@ namespace HRMS.Infrastructure.Migrations
                             Name = "",
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECqGtc4fBoSuOILISnoR4daSr9HGIplwU8QOnu08n75ckI7lGaKwg6L5zWV18mgX5w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPqZ+XBDHyBdQK5sMBwNQKzKZOaDu5+bALUwynCuYiw2x39ATy/zGlpb33Zk/ElLuw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "be4f6fcd-28d9-4ce0-83c7-6b0aa477b2d4",
+                            SecurityStamp = "24f40946-6eed-47ef-8123-cf1f11c832ae",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -284,7 +284,7 @@ namespace HRMS.Infrastructure.Migrations
                         {
                             Id = 2L,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4048cf04-36f6-45f6-932a-14a996db29da",
+                            ConcurrencyStamp = "53f3bb72-5116-4ae4-9fba-3bf951e63187",
                             CreatedBy = 0L,
                             CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "employee@localhost.com",
@@ -293,9 +293,9 @@ namespace HRMS.Infrastructure.Migrations
                             Name = "",
                             NormalizedEmail = "EMPLOYEE@LOCALHOST.COM",
                             NormalizedUserName = "EMPLOYEE@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENg1Urnp0hnFZViVZe+Jui+q4ed/PQuqaD7pK7l34roB/IrbR0TRo9g/NDGpVmSKBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP2g7xL+3ipERzpaq1LUsfm64pm+DqNXGYzhVe54kz4hT9VyBQ+vtmsvA7iC76UqXg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5c4c44d0-4a43-4cb6-91e8-5dda8d478c79",
+                            SecurityStamp = "d5cffac2-b3de-4613-a43d-e4e732657851",
                             TwoFactorEnabled = false,
                             UserName = "employee@localhost.com"
                         });

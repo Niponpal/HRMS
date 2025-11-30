@@ -1,0 +1,68 @@
+﻿@model HRMS.Application.ViewModel.AttendanceVm
+
+<div class="container">
+    <div class="card shadow-sm mt-5">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">
+                @(Model.Id > 0 ? "Edit Attendance" : "Create Attendance")
+            </h2>
+
+            <form asp-action="create-or-edit" method="post" asp-controller="Attendance">
+                @* Hidden Id field for edit *@
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="AttendanceDate" class="form-label">Attendance Date</label>
+                    <input asp-for="AttendanceDate" type="date" class="form-control" required />
+                    <span asp-validation-for="AttendanceDate" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="InTime" class="form-label">In Time</label>
+                    <input asp-for="InTime" type="time" class="form-control" />
+                    <span asp-validation-for="InTime" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="OutTime" class="form-label">Out Time</label>
+                    <input asp-for="OutTime" type="time" class="form-control" />
+                    <span asp-validation-for="OutTime" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Status" class="form-label">Status</label>
+                    <select asp-for="Status" class="form-select" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                        <option value="Leave">Leave</option>
+                        <option value="Holiday">Holiday</option>
+                        <option value="Holiday Duty">Holiday Duty</option>
+                        <option value="Late">Late</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="WorkHours" class="form-label">Work Hours</label>
+                    <input asp-for="WorkHours" type="number" step="0.01" class="form-control" placeholder="Enter work hours" />
+                    <span asp-validation-for="WorkHours" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Remarks" class="form-label">Remarks</label>
+                    <textarea asp-for="Remarks" class="form-control" placeholder="Enter remarks"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    @(Model.Id > 0 ? "Update" : "Create")
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
