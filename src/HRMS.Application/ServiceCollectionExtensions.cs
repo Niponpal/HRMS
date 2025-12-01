@@ -2,7 +2,6 @@
 using DinkToPdf.Contracts;
 using HRMS.Application.FileServices;
 using HRMS.Application.Logging;
-using HRMS.Application.Mapping;
 using HRMS.Application.Repositories;
 using HRMS.Application.Repositories.Auth;
 using HRMS.Application.Services;
@@ -21,6 +20,7 @@ public static class ServiceCollectionExtensions
         services. AddScoped<IExcelUploadService, ExcelUploadService>();
         services.AddScoped(typeof(IAppLogger<>), typeof(AppLogger<>));
         services.AddSingleton<IFileService, FileService>();
+        services.AddScoped<IExcelDownloadService, ExcelService>();
         services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
         // Register your PDF service
         services.AddScoped<IPdfService, PdfService>();
