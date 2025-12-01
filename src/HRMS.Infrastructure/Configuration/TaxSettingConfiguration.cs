@@ -13,6 +13,7 @@ namespace HRMS.Infrastructure.Configuration
             // Properties Configuration
             builder.Property(d=>d.TaxYear)
                 .IsRequired();
+
             builder.Property(d => d.MinIncome)
                 .IsRequired();
             builder.Property(d => d.MaxIncome)

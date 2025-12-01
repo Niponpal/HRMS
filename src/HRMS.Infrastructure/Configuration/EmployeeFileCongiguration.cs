@@ -12,6 +12,7 @@ public class EmployeeFileCongiguration:IEntityTypeConfiguration<EmployeeFile>
     {
         builder.HasKey(builder => builder.Id);
         builder.ToTable(nameof(EmployeeFile));
+
         builder.Property(d => d.FileType)
             .IsRequired()
             .HasMaxLength(50);
