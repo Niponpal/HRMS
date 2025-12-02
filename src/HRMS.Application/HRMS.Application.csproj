@@ -21,6 +21,14 @@
 	<ItemGroup>
 		<EmbeddedResource Include="PdfTemplates\**\*.cshtml" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="runtimes\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	
+	
   <ItemGroup>
     <ProjectReference Include="..\HRMS.Core\HRMS.Core.csproj" />
     <ProjectReference Include="..\HRMS.Infrastructure\HRMS.Infrastructure.csproj" />

@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IAppLogger<>), typeof(AppLogger<>));
         services.AddSingleton<IFileService, FileService>();
         services.AddScoped<IExcelDownloadService, ExcelService>();
-        services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+        services.AddDinkToPdf();
         // Register your PDF service
         services.AddScoped<IPdfService, PdfService>();
         // Register Razor view renderer
