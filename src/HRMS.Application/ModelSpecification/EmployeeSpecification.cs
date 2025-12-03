@@ -10,7 +10,7 @@ public class EmployeeSpecification: BaseSpecification<Employee>
     {
         // Apply filtering based on the filter criteria
         if (!string.IsNullOrWhiteSpace(filter.Search))
-            ApplyCriteria(p => p.FullName.Contains(filter.Search));
+            ApplyCriteria(p => p.EmployeeName.Contains(filter.Search));
         // Exclude deleted records
     }
 

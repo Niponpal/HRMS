@@ -8,11 +8,75 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRMS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AccommodationCharge",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationCharge", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AdvanceSalary",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AdvancedSalaryAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdvanceSalary", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Arrear",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Arrear", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -91,6 +155,48 @@ namespace HRMS.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CanteenCharge",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CanteenCharge", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CheckOff",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckOff", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Department",
                 columns: table => new
                 {
@@ -147,6 +253,27 @@ namespace HRMS.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Fine",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fine", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LeaveType",
                 columns: table => new
                 {
@@ -164,6 +291,69 @@ namespace HRMS.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LeaveType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LoanFromCompany",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LoanFromCompany", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MembershipPay",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MembershipPay", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Penalty",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Penalty", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,6 +442,27 @@ namespace HRMS.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaxSetting", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TransportServiceCharge",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MonthlyDeductibleAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EffectiveSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    EndSalaryCycle = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedBy = table.Column<long>(type: "bigint", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransportServiceCharge", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -373,25 +584,68 @@ namespace HRMS.Infrastructure.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    JoinDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DepartmentId = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "0"),
-                    DesignationId = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "0"),
-                    SalaryStructureId = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "0"),
-                    ReportingManagerId = table.Column<long>(type: "bigint", nullable: false, defaultValueSql: "0"),
-                    NationalId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    PermanentAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    MaritalStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    BloodGroup = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    EmergencyContactName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    EmergencyContactPhone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    EmployeeIdCardNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OldEmployeeIdCardNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RFID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Designation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JoiningDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RegNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OfficialNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OfficialEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResignationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CurrentWorkstation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PalceOfPosting = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PresentDistrict = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParmanentDistrict = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SuspensionStatusName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShiftType = table.Column<int>(type: "int", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Sex = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Religion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PassportNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DrivingLicense = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BloodGroup = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FatherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MotherName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaritalStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpouseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsFreedomFither = table.Column<bool>(type: "bit", nullable: true),
+                    Remarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeofDeath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GrossSalary = table.Column<double>(type: "float", nullable: true),
+                    BasicSalary = table.Column<double>(type: "float", nullable: true),
+                    HouseRent = table.Column<double>(type: "float", nullable: true),
+                    TransportAllowance = table.Column<double>(type: "float", nullable: true),
+                    MedicalAllowance = table.Column<double>(type: "float", nullable: true),
+                    FoodAllowance = table.Column<double>(type: "float", nullable: true),
+                    BonusAllowance = table.Column<double>(type: "float", nullable: true),
+                    OthersAllowance = table.Column<double>(type: "float", nullable: true),
+                    AttendanceBonus = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    BreakFastAllowance = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    TiffinAllowance = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    LeaveFareAssistance = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    AdvanceSalary = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    LoanfromCompany = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    Fine = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    MobileBill = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    Overtime = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    Increment = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    FestivalBonus = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    PerformaceBonus = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    MaternityLeave = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    MaternityLeaveAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: true),
+                    DepartmentId = table.Column<long>(type: "bigint", nullable: true, defaultValueSql: "0"),
+                    DesignationId = table.Column<long>(type: "bigint", nullable: true, defaultValueSql: "0"),
+                    SalaryStructureId = table.Column<long>(type: "bigint", nullable: true, defaultValueSql: "0"),
                     CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     ModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -411,12 +665,6 @@ namespace HRMS.Infrastructure.Migrations
                         name: "FK_Employee_Designation_DesignationId",
                         column: x => x.DesignationId,
                         principalTable: "Designation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Employee_Employee_ReportingManagerId",
-                        column: x => x.ReportingManagerId,
-                        principalTable: "Employee",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -737,8 +985,8 @@ namespace HRMS.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedBy", "UpdatedDate", "UserName" },
                 values: new object[,]
                 {
-                    { 1L, 0, "0a7338b7-43f7-4d51-b08f-49a0d6bde0fd", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPqZ+XBDHyBdQK5sMBwNQKzKZOaDu5+bALUwynCuYiw2x39ATy/zGlpb33Zk/ElLuw==", null, false, "24f40946-6eed-47ef-8123-cf1f11c832ae", false, null, null, "admin@localhost.com" },
-                    { 2L, 0, "53f3bb72-5116-4ae4-9fba-3bf951e63187", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "employee@localhost.com", true, false, null, "", "EMPLOYEE@LOCALHOST.COM", "EMPLOYEE@LOCALHOST.COM", "AQAAAAIAAYagAAAAEP2g7xL+3ipERzpaq1LUsfm64pm+DqNXGYzhVe54kz4hT9VyBQ+vtmsvA7iC76UqXg==", null, false, "d5cffac2-b3de-4613-a43d-e4e732657851", false, null, null, "employee@localhost.com" }
+                    { 1L, 0, "22ce5ed8-f685-400d-82aa-9636d23df37d", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@localhost.com", true, false, null, "", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAECulG4dOTAoCxUoQZ32OihCDRk2YBtG/OXwxEKK7l/IyP5ZUDpfazXTh0oRzNdEn3w==", null, false, "201d5617-5e46-44b4-85a7-cbcf2bf8810d", false, null, null, "admin@localhost.com" },
+                    { 2L, 0, "7cd70d8d-1958-4981-b954-5fccc4aa7a12", 0L, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "employee@localhost.com", true, false, null, "", "EMPLOYEE@LOCALHOST.COM", "EMPLOYEE@LOCALHOST.COM", "AQAAAAIAAYagAAAAEIYn06xx8UTiECA8qMFf/RZgXxs6CA5hPtM02YJQorSC0cPGVGN7vYbvqy1nwO5OCg==", null, false, "21f9c3e3-6f83-4efc-8ae3-ee45986ac4ed", false, null, null, "employee@localhost.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -814,11 +1062,6 @@ namespace HRMS.Infrastructure.Migrations
                 name: "IX_Employee_DesignationId",
                 table: "Employee",
                 column: "DesignationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Employee_ReportingManagerId",
-                table: "Employee",
-                column: "ReportingManagerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_SalaryStructureId",
@@ -907,6 +1150,15 @@ namespace HRMS.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AccommodationCharge");
+
+            migrationBuilder.DropTable(
+                name: "AdvanceSalary");
+
+            migrationBuilder.DropTable(
+                name: "Arrear");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -928,10 +1180,19 @@ namespace HRMS.Infrastructure.Migrations
                 name: "AuditLogs");
 
             migrationBuilder.DropTable(
+                name: "CanteenCharge");
+
+            migrationBuilder.DropTable(
+                name: "CheckOff");
+
+            migrationBuilder.DropTable(
                 name: "EmployeeFile");
 
             migrationBuilder.DropTable(
                 name: "FinancialYear");
+
+            migrationBuilder.DropTable(
+                name: "Fine");
 
             migrationBuilder.DropTable(
                 name: "HolidayAssignment");
@@ -943,7 +1204,16 @@ namespace HRMS.Infrastructure.Migrations
                 name: "LeaveApproval");
 
             migrationBuilder.DropTable(
+                name: "LoanFromCompany");
+
+            migrationBuilder.DropTable(
+                name: "MembershipPay");
+
+            migrationBuilder.DropTable(
                 name: "Payroll");
+
+            migrationBuilder.DropTable(
+                name: "Penalty");
 
             migrationBuilder.DropTable(
                 name: "ProvidentFund");
@@ -953,6 +1223,9 @@ namespace HRMS.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "TaxSetting");
+
+            migrationBuilder.DropTable(
+                name: "TransportServiceCharge");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

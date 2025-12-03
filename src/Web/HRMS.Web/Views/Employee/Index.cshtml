@@ -1,4 +1,17 @@
-﻿@model HRMS.Application.CommonModel.PaginationModel<HRMS.Application.ViewModel.EmployeeVm>
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+@model HRMS.Application.CommonModel.PaginationModel<HRMS.Application.ViewModel.EmployeeVm>
 
 @{
     string currentSearch = Context.Request.Query["search"];
@@ -43,32 +56,159 @@
         </a>
     </div>
 
+    <!-- Employeee Information Buttono -->
+    <div class="btn btn-primary my-2 ms-3">
+        <a asp-action="CreateOrEdit" asp-controller="Employee" class="btn btn-primary d-inline-block">
+            Employee Information
+        </a>
+
+
+    </div>
+
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped shadow-sm">
             <thead class="table-dark">
+
+
                 <tr>
-                    <th class="px-4 py-3">Sl No</th>
-                    <th class="px-4 py-3">Name</th>
-                    <th class="px-4 py-3">Email</th>
-                    <th class="px-4 py-3">Phone</th>
-                    <th class="px-4 py-3">Department</th>
-                    <th class="px-4 py-3">Designation</th>
-                    <th class="px-4 py-3">Actions</th>
+                    <th>Sl No</th>
+                    <th>Employee ID</th>
+                    <th>Old Employee ID</th>
+                    <th>RFID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Joining Date</th>
+                    <th>Reg No</th>
+                    <th>Official Number</th>
+                    <th>Official Email</th>
+                    <th>Department</th>
+                    <th>Employee Type</th>
+                    <th>Resignation Date</th>
+                    <th>Is Active</th>
+                    <th>Current Workstation</th>
+                    <th>Place of Posting</th>
+                    <th>Present District</th>
+                    <th>Permanent District</th>
+                    <th>Suspension Status</th>
+                    <th>Shift Type</th>
+                    <th>Date of Birth</th>
+                    <th>Sex</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Profile Picture</th>
+                    <th>NID</th>
+                    <th>Religion</th>
+                    <th>Nationality</th>
+                    <th>Passport No</th>
+                    <th>Driving License</th>
+                    <th>Blood Group</th>
+                    <th>Father Name</th>
+                    <th>Mother Name</th>
+                    <th>Marital Status</th>
+                    <th>Spouse Name</th>
+                    <th>Is Freedom Fighter</th>
+                    <th>Remarks</th>
+                    <th>Type of Death</th>
+                    <th>Gross Salary</th>
+                    <th>Basic Salary</th>
+                    <th>House Rent</th>
+                    <th>Transport Allowance</th>
+                    <th>Medical Allowance</th>
+                    <th>Food Allowance</th>
+                    <th>Bonus Allowance</th>
+                    <th>Other Allowance</th>
+                    <th>Attendance Bonus</th>
+                    <th>Breakfast Allowance</th>
+                    <th>Tiffin Allowance</th>
+                    <th>Leave Fare Assistance</th>
+                    <th>Advance Salary</th>
+                    <th>Loan from Company</th>
+                    <th>Fine</th>
+                    <th>Mobile Bill</th>
+                    <th>Overtime</th>
+                    <th>Increment</th>
+                    <th>Festival Bonus</th>
+                    <th>Performance Bonus</th>
+                    <th>Maternity Leave</th>
+                    <th>Maternity Leave Amount</th>
+                    <th>Actions</th>
                 </tr>
+
             </thead>
             <tbody>
+
+
                 @foreach (var item in Model.Items)
                 {
                     <tr>
-                        <td class="px-4 py-3">@sl</td>
-                        <td class="px-4 py-3">@item.FullName</td>
-                        <td class="px-4 py-3">@item.Email</td>
-                        <td class="px-4 py-3">@item.Phone</td>
-                        <td class="px-4 py-3">@item.DepartmentId</td>
-                        <td class="px-4 py-3">@item.DesignationId</td>
+                        <td>@sl</td>
+                        <td>@item.EmployeeIdCardNo</td>
+                        <td>@item.OldEmployeeIdCardNo</td>
+                        <td>@item.RFID</td>
+                        <td>@item.EmployeeName</td>
+                        <td>@item.Designation</td>
+                        <td>@item.JoiningDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.RegNo</td>
+                        <td>@item.OfficialNumber</td>
+                        <td>@item.OfficialEmail</td>
+                        <td>@item.Department</td>
+                        <td>@item.EmployeeType</td>
+                        <td>@item.ResignationDate?.ToString("dd/MM/yyyy")</td>
+                        <td>@(item.IsActive ? "Yes" : "No")</td>
+                        <td>@item.CurrentWorkstation</td>
+                        <td>@item.PalceOfPosting</td>
+                        <td>@item.PresentDistrict</td>
+                        <td>@item.ParmanentDistrict</td>
+                        <td>@item.SuspensionStatusName</td>
+                        <td>@item.ShiftType</td>
+                        <td>@item.DateOfBirth?.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Sex</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ProfilePicture))
+                            {
+                                <img src="@item.ProfilePicture" alt="Profile" width="50" height="50" />
+                            }
+                        </td>
+                        <td>@item.NID</td>
+                        <td>@item.Religion</td>
+                        <td>@item.Nationality</td>
+                        <td>@item.PassportNo</td>
+                        <td>@item.DrivingLicense</td>
+                        <td>@item.BloodGroup</td>
+                        <td>@item.FatherName</td>
+                        <td>@item.MotherName</td>
+                        <td>@item.MaritalStatus</td>
+                        <td>@item.SpouseName</td>
+                        <td>@(item.IsFreedomFither == true ? "Yes" : "No")</td>
+                        <td>@item.Remarks</td>
+                        <td>@item.TypeofDeath</td>
+                        <td>@item.GrossSalary</td>
+                        <td>@item.BasicSalary</td>
+                        <td>@item.HouseRent</td>
+                        <td>@item.TransportAllowance</td>
+                        <td>@item.MedicalAllowance</td>
+                        <td>@item.FoodAllowance</td>
+                        <td>@item.BonusAllowance</td>
+                        <td>@item.OthersAllowance</td>
+                        <td>@item.AttendanceBonus</td>
+                        <td>@item.BreakFastAllowance</td>
+                        <td>@item.TiffinAllowance</td>
+                        <td>@item.LeaveFareAssistance</td>
+                        <td>@item.AdvanceSalary</td>
+                        <td>@item.LoanfromCompany</td>
+                        <td>@item.Fine</td>
+                        <td>@item.MobileBill</td>
+                        <td>@item.Overtime</td>
+                        <td>@item.Increment</td>
+                        <td>@item.FestivalBonus</td>
+                        <td>@item.PerformaceBonus</td>
+                        <td>@item.MaternityLeave</td>
+                        <td>@item.MaternityLeaveAmount</td>
 
-                        <td class="px-4 py-3 d-flex gap-2">
-
+                        <td class="d-flex gap-2">
                             <!-- Edit -->
                             <a href="@Url.Action("create-or-edit", "employee", new { Id = item.Id })"
                                title="Edit" class="text-primary">
@@ -99,8 +239,13 @@
                     sl++;
                 }
             </tbody>
+
+
+
+         
         </table>
     </div>
 
     <partial name="_Pagination" model="Model" />
 </div>
+ 

@@ -16,9 +16,9 @@ public class DesignationConfiguration:IEntityTypeConfiguration<Designation>
 
         // Configure relationship with Employee entity
 
-        builder.HasMany(builder => builder.Employees)
-            .WithOne(builder => builder.Designation)
-            .HasForeignKey(builder => builder.DesignationId);
+        //builder.HasMany(builder => builder.Employees)
+        //    .WithOne(builder => builder.Designation)
+        //    .HasForeignKey(builder => builder.DesignationId);
 
     }
 }

@@ -9,7 +9,7 @@ public class Employee:AuditableEntity
     //public string Gender { get; set; } = string.Empty;
     //public DateTime? DateOfBirth { get; set; }
     //public DateTime? JoinDate { get; set; }
-    // FK
+
     //public long DepartmentId { get; set; }
     //public Department Department { get; set; }
     //public long DesignationId { get; set; }
@@ -35,7 +35,8 @@ public class Employee:AuditableEntity
 
 
 
-    // Official Information
+    //Official Information
+
     public string EmployeeIdCardNo { get; set; }
     public string OldEmployeeIdCardNo { get; set; }
     public string RFID { get; set; }
@@ -58,6 +59,7 @@ public class Employee:AuditableEntity
 
 
     // Personal Information
+
     public DateTime? DateOfBirth { get; set; }
     public string Sex { get; set; }
     public string PhoneNumber { get; set; }
